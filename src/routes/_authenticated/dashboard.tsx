@@ -93,7 +93,7 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
     setExtracting(true);
     await new Promise((r) => setTimeout(r, 1400)); // simulated vector extraction
     ins.mutate(
-      { ...f, microchip: f.microchip || null, medical_alerts: f.medical_alerts || null, avatar, breed: AVATARS[avatar].breed, photo_url: photo },
+      { ...f, microchip: f.microchip || null, medical_alerts: f.medical_alerts || null, avatar, breed: AVATARS[avatar]?.breed ?? "Dog", photo_url: photo },
       {
         onSuccess: () => {
           toast.success(`${f.name}'s passport is issued! 🐾`);

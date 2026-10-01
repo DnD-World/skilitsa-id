@@ -55,7 +55,7 @@ function ScanPage() {
       setStep(i);
     }
     const { data } = await lookup;
-    const dog = (data && data[0]) || DEMO_DOGS[Math.floor(Math.random() * DEMO_DOGS.length)];
+    const dog: MatchDog = (data && data[0]) || DEMO_DOGS[Math.floor(Math.random() * DEMO_DOGS.length)]!;
     setMatch({ dog, score: 94 + Math.random() * 5.5 });
     setPhase("match");
     stream?.getTracks().forEach((t) => t.stop());
