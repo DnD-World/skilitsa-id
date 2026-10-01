@@ -14,13 +14,218 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      dogs: {
+        Row: {
+          avatar: string
+          breed: string
+          created_at: string
+          fingerprint_id: string
+          id: string
+          medical_alerts: string | null
+          microchip: string | null
+          name: string
+          owner_id: string
+          owner_name: string
+          owner_phone: string
+          photo_url: string | null
+          scannable: boolean
+        }
+        Insert: {
+          avatar?: string
+          breed?: string
+          created_at?: string
+          fingerprint_id?: string
+          id?: string
+          medical_alerts?: string | null
+          microchip?: string | null
+          name: string
+          owner_id?: string
+          owner_name: string
+          owner_phone: string
+          photo_url?: string | null
+          scannable?: boolean
+        }
+        Update: {
+          avatar?: string
+          breed?: string
+          created_at?: string
+          fingerprint_id?: string
+          id?: string
+          medical_alerts?: string | null
+          microchip?: string | null
+          name?: string
+          owner_id?: string
+          owner_name?: string
+          owner_phone?: string
+          photo_url?: string | null
+          scannable?: boolean
+        }
+        Relationships: []
+      }
+      expenses: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          id: string
+          label: string
+          owner_id: string
+          spent_on: string
+        }
+        Insert: {
+          amount: number
+          category: string
+          created_at?: string
+          id?: string
+          label: string
+          owner_id?: string
+          spent_on?: string
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          id?: string
+          label?: string
+          owner_id?: string
+          spent_on?: string
+        }
+        Relationships: []
+      }
+      food_bags: {
+        Row: {
+          bag_kg: number
+          brand: string
+          created_at: string
+          days_lasting: number
+          id: string
+          opened_on: string
+          owner_id: string
+        }
+        Insert: {
+          bag_kg: number
+          brand: string
+          created_at?: string
+          days_lasting: number
+          id?: string
+          opened_on?: string
+          owner_id?: string
+        }
+        Update: {
+          bag_kg?: number
+          brand?: string
+          created_at?: string
+          days_lasting?: number
+          id?: string
+          opened_on?: string
+          owner_id?: string
+        }
+        Relationships: []
+      }
+      health_events: {
+        Row: {
+          clinic: string | null
+          created_at: string
+          dog_id: string | null
+          done: boolean
+          due_on: string
+          id: string
+          kind: string
+          owner_id: string
+          title: string
+        }
+        Insert: {
+          clinic?: string | null
+          created_at?: string
+          dog_id?: string | null
+          done?: boolean
+          due_on: string
+          id?: string
+          kind: string
+          owner_id?: string
+          title: string
+        }
+        Update: {
+          clinic?: string | null
+          created_at?: string
+          dog_id?: string | null
+          done?: boolean
+          due_on?: string
+          id?: string
+          kind?: string
+          owner_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "health_events_dog_id_fkey"
+            columns: ["dog_id"]
+            isOneToOne: false
+            referencedRelation: "dogs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      loyalty_cards: {
+        Row: {
+          business: string
+          code: string
+          created_at: string
+          format: string
+          id: string
+          owner_id: string
+        }
+        Insert: {
+          business: string
+          code: string
+          created_at?: string
+          format?: string
+          id?: string
+          owner_id?: string
+        }
+        Update: {
+          business?: string
+          code?: string
+          created_at?: string
+          format?: string
+          id?: string
+          owner_id?: string
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          monthly_budget: number
+          owner_id: string
+        }
+        Insert: {
+          monthly_budget?: number
+          owner_id?: string
+        }
+        Update: {
+          monthly_budget?: number
+          owner_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      scan_match: {
+        Args: never
+        Returns: {
+          avatar: string
+          breed: string
+          fingerprint_id: string
+          medical_alerts: string
+          name: string
+          owner_name: string
+          owner_phone: string
+          photo_url: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
