@@ -5,12 +5,13 @@ import { PageTitle, inputCls } from "@/components/Shell";
 import { daysBetween, today, useDelete, useInsert, useRows, useUpdate } from "@/lib/db";
 
 export const Route = createFileRoute("/_authenticated/health")({
-  head: () => ({ meta: [{ title: "Health & Vaccines — SkilitsaID" }, { name: "description", content: "Vaccine timeline, vet checkups and medication reminders." }] }),
+  head: () => ({ meta: [{ title: "Υγεία και εμβόλια — SkilitsaID" }, { name: "description", content: "Πρόγραμμα εμβολίων, κτηνιατρικών ελέγχων και φαρμάκων." }, { property: "og:title", content: "Υγεία και εμβόλια — SkilitsaID" }, { property: "og:description", content: "Πρόγραμμα εμβολίων, κτηνιατρικών ελέγχων και φαρμάκων." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Health,
 });
 
 type Ev = { id: string; kind: string; title: string; due_on: string; clinic: string | null; done: boolean; dog_id: string | null };
 const CORE = ["Rabies", "DHPP", "Bordetella", "Leptospirosis"];
+const HEALTH_LABELS: Record<string, string> = { Rabies: "Λύσσα", DHPP: "DHPP", Bordetella: "Bordetella", Leptospirosis: "Λεπτοσπείρωση", "Flea/tick chewable": "Χάπι για ψύλλους και τσιμπούρια", "Annual checkup": "Ετήσιος έλεγχος" };
 const ICON = { vaccine: Syringe, appointment: Stethoscope, medication: Pill } as const;
 
 function Health() {
@@ -24,7 +25,7 @@ function Health() {
   const t = today();
   return (
     <div>
-      <PageTitle title="Health, Vaccines & Vet" sub="Core immunizations, checkup countdowns and monthly chewables." />
+      <PageTitle title="Υγεία, εμβόλια και κτηνίατρος" sub="Βασικά εμβόλια, αντίστροφη μέτρηση ελέγχων και μηνιαία φάρμακα." />
       <div className="mb-6 grid gap-4 sm:grid-cols-4">
         {CORE.map((v) => {
           const next = evs.filter((e) => e.kind === "vaccine" && e.title === v && !e.done)[0];
@@ -32,9 +33,9 @@ function Health() {
           return (
             <div key={v} className="clay p-4 text-center">
               <Syringe className="mx-auto size-7 text-secondary-foreground" />
-              <p className="mt-1 font-display text-lg font-bold">{v}</p>
+              <p className="mt-1 font-display text-lg font-bold">{HEALTH_LABELS[v]}</p>
               <p className="text-xs text-muted-foreground">
-                {next ? `Due in ${daysBetween(t, new Date(next.due_on))} days` : last ? `Done ${last.due_on}` : "Not scheduled"}
+                {next ? `Σε ${daysBetween(t, new Date(next.due_on))} ημέρες` : last ? `Έγινε ${last.due_on}` : "Δεν έχει προγραμματιστεί"}
               </p>
             </div>
           );
@@ -49,26 +50,26 @@ function Health() {
         className="clay mb-6 grid gap-3 p-6 md:grid-cols-6"
       >
         <select className={inputCls} value={f.kind} onChange={(e) => setF({ ...f, kind: e.target.value, title: e.target.value === "vaccine" ? "Rabies" : e.target.value === "medication" ? "Flea/tick chewable" : "Annual checkup" })}>
-          <option value="vaccine">Vaccine</option>
-          <option value="appointment">Vet appointment</option>
-          <option value="medication">Medication</option>
+          <option value="vaccine">Εμβόλιο</option>
+          <option value="appointment">Ραντεβού κτηνιάτρου</option>
+          <option value="medication">Φάρμακο</option>
         </select>
         {f.kind === "vaccine" ? (
-          <select className={inputCls} value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })}>{CORE.map((c) => <option key={c}>{c}</option>)}</select>
+          <select className={inputCls} value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })}>{CORE.map((c) => <option key={c} value={c}>{HEALTH_LABELS[c]}</option>)}</select>
         ) : (
           <input className={inputCls} required value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} />
         )}
         <select className={inputCls} value={f.dog_id} onChange={(e) => setF({ ...f, dog_id: e.target.value })}>
-          <option value="">All dogs</option>
+          <option value="">Όλοι οι σκύλοι</option>
           {dogs.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}
         </select>
         <input className={inputCls} required type="date" value={f.due_on} onChange={(e) => setF({ ...f, due_on: e.target.value })} />
-        <input className={inputCls} placeholder="Clinic" value={f.clinic} onChange={(e) => setF({ ...f, clinic: e.target.value })} />
-        <button className="clay-btn bg-primary py-2 text-primary-foreground">Add</button>
+        <input className={inputCls} placeholder="Κτηνιατρείο" value={f.clinic} onChange={(e) => setF({ ...f, clinic: e.target.value })} />
+        <button className="clay-btn bg-primary py-2 text-primary-foreground">Προσθήκη</button>
       </form>
 
       <ol className="relative space-y-4 border-l-4 border-dashed border-border pl-6">
-        {evs.length === 0 && <p className="text-muted-foreground">Nothing scheduled yet.</p>}
+        {evs.length === 0 && <p className="text-muted-foreground">Δεν υπάρχει ακόμη προγραμματισμένο ραντεβού.</p>}
         {evs.map((e) => {
           const Icon = ICON[e.kind as keyof typeof ICON] ?? Stethoscope;
           const d = daysBetween(t, new Date(e.due_on));
@@ -78,14 +79,14 @@ function Health() {
               <span className="absolute -left-[14px] size-6 rounded-full border-4 border-background bg-primary" />
               <Icon className="size-7 shrink-0 text-primary" />
               <div className="flex-1">
-                <p className="font-bold">{e.title} {e.dog_id && <span className="text-muted-foreground">· {dogs.find((x) => x.id === e.dog_id)?.name}</span>}</p>
+                <p className="font-bold">{HEALTH_LABELS[e.title] ?? e.title} {e.dog_id && <span className="text-muted-foreground">· {dogs.find((x) => x.id === e.dog_id)?.name}</span>}</p>
                 <p className="text-sm text-muted-foreground">{e.due_on}{e.clinic && ` · ${e.clinic}`}</p>
               </div>
               <span className={`rounded-full px-3 py-1 text-sm font-bold ${tone}`}>
-                {e.done ? "Done" : d < 0 ? `${-d}d overdue` : d === 0 ? "Today" : `in ${d}d`}
+                {e.done ? "Ολοκληρώθηκε" : d < 0 ? `${-d}ημ. καθυστέρηση` : d === 0 ? "Σήμερα" : `σε ${d}ημ.`}
               </span>
               <button
-                aria-label="Mark done"
+                aria-label="Σήμανση ως ολοκληρωμένο"
                 onClick={() => {
                   upd.mutate({ id: e.id, done: !e.done });
                   if (!e.done && e.kind === "medication") {
@@ -97,12 +98,12 @@ function Health() {
               >
                 <Check className="size-4" />
               </button>
-              <button aria-label="Delete" onClick={() => del.mutate(e.id)} className="text-muted-foreground hover:text-destructive"><Trash2 className="size-4" /></button>
+              <button aria-label="Διαγραφή" onClick={() => del.mutate(e.id)} className="text-muted-foreground hover:text-destructive"><Trash2 className="size-4" /></button>
             </li>
           );
         })}
       </ol>
-      <p className="mt-4 text-xs text-muted-foreground">Completing a monthly medication automatically schedules next month's dose.</p>
+      <p className="mt-4 text-xs text-muted-foreground">Η ολοκλήρωση ενός μηνιαίου φαρμάκου προγραμματίζει αυτόματα την επόμενη δόση.</p>
     </div>
   );
 }
