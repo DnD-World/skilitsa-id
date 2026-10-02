@@ -58,7 +58,7 @@ function Dashboard() {
                   <AlertTriangle className="size-4" /> {d.medical_alerts}
                 </p>
               )}
-              <div className="mx-5 mt-3 flex h-8 items-end gap-px" title="Fingerprint preview (24 of 896 dims)">
+              <div className="mx-5 mt-3 flex h-8 items-end gap-px" title="Προεπισκόπηση αποτυπώματος (24 από 896 διαστάσεις)">
                 {fakeVector(d.fingerprint_id, 64).map((v, i) => (
                   <div key={i} className={`flex-1 rounded-sm ${i < 27 ? "bg-secondary" : "bg-chart-3"}`} style={{ height: `${15 + v * 85}%` }} />
                 ))}
@@ -93,7 +93,7 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
     setExtracting(true);
     await new Promise((r) => setTimeout(r, 1400)); // simulated vector extraction
     ins.mutate(
-      { ...f, microchip: f.microchip || null, medical_alerts: f.medical_alerts || null, avatar, breed: AVATARS[avatar]?.breed ?? "Dog", photo_url: photo },
+      { ...f, microchip: f.microchip || null, medical_alerts: f.medical_alerts || null, avatar, breed: AVATARS[avatar]?.breed ?? "Σκύλος", photo_url: photo },
       {
         onSuccess: () => {
            toast.success(`Το διαβατήριο του ${f.name} εκδόθηκε! 🐾`);

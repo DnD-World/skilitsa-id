@@ -55,7 +55,9 @@ function ScanPage() {
       setStep(i);
     }
     const { data } = await lookup;
-    const dog: MatchDog = (data && data[0]) || DEMO_DOGS[Math.floor(Math.random() * DEMO_DOGS.length)]!;
+    const fallbackDog = DEMO_DOGS[Math.floor(Math.random() * DEMO_DOGS.length)] ?? DEMO_DOGS[0];
+    if (!fallbackDog) return;
+    const dog: MatchDog = (data && data[0]) || fallbackDog;
     setMatch({ dog, score: 94 + Math.random() * 5.5 });
     setPhase("match");
     stream?.getTracks().forEach((t) => t.stop());
