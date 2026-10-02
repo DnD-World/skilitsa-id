@@ -50,7 +50,7 @@ function ThemeToggle() {
   }, []);
   return (
     <button
-      aria-label="Toggle dark mode"
+      aria-label="Εναλλαγή σκοτεινής λειτουργίας"
       onClick={() => {
         const d = !dark;
         setDark(d);
@@ -65,11 +65,11 @@ function ThemeToggle() {
 }
 
 const NAV = [
-  { to: "/dashboard", label: "Passports" },
-  { to: "/budget", label: "Budget" },
-  { to: "/health", label: "Health" },
-  { to: "/wallet", label: "Wallet" },
-  { to: "/community", label: "Community" },
+  { to: "/dashboard", label: "Διαβατήρια" },
+  { to: "/budget", label: "Έξοδα" },
+  { to: "/health", label: "Υγεία" },
+  { to: "/wallet", label: "Πορτοφόλι" },
+  { to: "/community", label: "Παρέα" },
 ] as const;
 
 export function Shell({ children }: { children: ReactNode }) {
@@ -99,12 +99,12 @@ export function Shell({ children }: { children: ReactNode }) {
             </nav>
           )}
           <Link to="/scan" className="clay-btn flex items-center gap-2 bg-destructive px-4 py-2 text-sm text-destructive-foreground">
-            <ScanFace className="size-4" /> Scan Lost Dog
+             <ScanFace className="size-4" /> Σάρωση χαμένου σκύλου
           </Link>
           <ThemeToggle />
           {user ? (
             <button
-              aria-label="Sign out"
+              aria-label="Αποσύνδεση"
               onClick={async () => {
                 await qc.cancelQueries();
                 qc.clear();
@@ -117,7 +117,7 @@ export function Shell({ children }: { children: ReactNode }) {
             </button>
           ) : (
             <Link to="/auth" className="clay-btn bg-primary px-4 py-2 text-sm text-primary-foreground">
-              Sign in
+              Σύνδεση
             </Link>
           )}
         </div>
