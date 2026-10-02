@@ -7,10 +7,10 @@ import { avatarSrc, DEMO_DOGS, fakeVector, type MatchDog } from "@/lib/dogs";
 export const Route = createFileRoute("/scan")({
   head: () => ({
     meta: [
-      { title: "Scan a Lost Dog — SkilitsaID" },
-      { name: "description", content: "Found a dog? Point your camera at their face to find and contact their owner instantly. No account required." },
-      { property: "og:title", content: "Scan a Lost Dog — SkilitsaID" },
-      { property: "og:description", content: "Point your phone at a lost dog's face and reunite them with their parent." },
+      { title: "Σάρωση χαμένου σκύλου — SkilitsaID" },
+      { name: "description", content: "Βρήκες σκύλο; Στρέψε την κάμερα στο πρόσωπό του και επικοινώνησε αμέσως με τον κηδεμόνα του, χωρίς λογαριασμό." },
+      { property: "og:title", content: "Σάρωση χαμένου σκύλου — SkilitsaID" },
+      { property: "og:description", content: "Σάρωσε το πρόσωπο ενός χαμένου σκύλου και βοήθησέ τον να επιστρέψει στην οικογένειά του." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/scan")({
 });
 
 type Phase = "idle" | "scanning" | "match";
-const STEPS = ["Detecting face & snout…", "Locating ear tips & pupils…", "DINO-v2 embedding (384-d)…", "DogFace ONNX embedding (512-d)…", "Fusing 896-d fingerprint…", "Cosine search across registry…"];
+const STEPS = ["Εντοπισμός προσώπου και μουσούδας…", "Εντοπισμός αυτιών και ματιών…", "Ανάλυση DINO-v2 (384-d)…", "Ανάλυση DogFace ONNX (512-d)…", "Σύνθεση αποτυπώματος 896-d…", "Αναζήτηση στο μητρώο…"];
 
 function ScanPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -55,7 +55,9 @@ function ScanPage() {
       setStep(i);
     }
     const { data } = await lookup;
-    const dog: MatchDog = (data && data[0]) || DEMO_DOGS[Math.floor(Math.random() * DEMO_DOGS.length)]!;
+    const fallbackDog = DEMO_DOGS[Math.floor(Math.random() * DEMO_DOGS.length)] ?? DEMO_DOGS[0];
+    if (!fallbackDog) return;
+    const dog: MatchDog = (data && data[0]) || fallbackDog;
     setMatch({ dog, score: 94 + Math.random() * 5.5 });
     setPhase("match");
     stream?.getTracks().forEach((t) => t.stop());
@@ -72,18 +74,18 @@ function ScanPage() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="text-center text-4xl font-bold">Found a dog?</h1>
-      <p className="mt-2 text-center text-muted-foreground">Fit their face in the frame. We'll find their family.</p>
+      <h1 className="text-center text-4xl font-bold">Βρήκες έναν σκύλο;</h1>
+      <p className="mt-2 text-center text-muted-foreground">Βάλε το πρόσωπό του μέσα στο πλαίσιο. Θα βρούμε την οικογένειά του.</p>
 
       <div className="clay relative mt-6 aspect-[3/4] overflow-hidden bg-foreground/90">
         {stream && <video ref={videoRef} autoPlay playsInline muted className="absolute inset-0 size-full object-cover" />}
-        {still && <img src={still} alt="Dog to scan" className="absolute inset-0 size-full object-cover" />}
+        {still && <img src={still} alt="Σκύλος προς σάρωση" className="absolute inset-0 size-full object-cover" />}
         {!stream && !still && (
           <div className="absolute inset-0 grid place-items-center p-6 text-center text-background">
             <div>
               <Camera className="mx-auto size-14 opacity-70" />
-              <p className="mt-3 font-bold">Camera is off</p>
-              {camError && <p className="text-sm opacity-70">Camera unavailable — upload a photo instead.</p>}
+              <p className="mt-3 font-bold">Η κάμερα είναι κλειστή</p>
+              {camError && <p className="text-sm opacity-70">Η κάμερα δεν είναι διαθέσιμη — ανέβασε μια φωτογραφία.</p>}
             </div>
           </div>
         )}
@@ -116,12 +118,12 @@ function ScanPage() {
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         {!stream && phase === "idle" && (
           <button onClick={openCam} className="clay-btn flex items-center gap-2 bg-secondary px-5 py-3 text-secondary-foreground">
-            <Camera className="size-5" /> Open camera
+            <Camera className="size-5" /> Άνοιγμα κάμερας
           </button>
         )}
         {phase === "idle" && (
           <label className="clay-btn flex cursor-pointer items-center gap-2 bg-muted px-5 py-3">
-            <Upload className="size-5" /> Upload photo
+            <Upload className="size-5" /> Ανέβασμα φωτογραφίας
             <input
               type="file"
               accept="image/*"
@@ -139,11 +141,11 @@ function ScanPage() {
         )}
         {(stream || still) && phase === "idle" && (
           <button onClick={runScan} className="clay-btn bg-destructive px-8 py-3 text-lg text-destructive-foreground">
-            Scan face
+            Σάρωση προσώπου
           </button>
         )}
       </div>
-      <p className="mt-4 text-center text-xs text-muted-foreground">Demo mode: matching is simulated.</p>
+      <p className="mt-4 text-center text-xs text-muted-foreground">Demo mode: η αντιστοίχιση είναι προσομοίωση.</p>
     </div>
   );
 }
@@ -154,31 +156,31 @@ function ReunionCard({ dog, score, onReset }: { dog: MatchDog; score: number; on
     <div className="mx-auto max-w-md animate-pop">
       <div className="clay overflow-hidden">
         <div className="bg-success p-4 text-center font-display text-2xl font-bold text-primary-foreground">
-          {score.toFixed(1)}% Match 🎉
+          {score.toFixed(1)}% αντιστοίχιση 🎉
         </div>
         <div className="p-6 text-center">
           <img src={dog.photo_url || avatarSrc(dog.avatar)} alt={dog.name} className="mx-auto size-44 rounded-full border-8 border-muted bg-muted object-cover" />
-          <h2 className="mt-4 text-4xl font-bold">Hi, I'm {dog.name}!</h2>
-          <p className="text-muted-foreground">{dog.breed} · Passport #{dog.fingerprint_id}</p>
-          <p className="mt-3">Thank you for finding me. My human <b>{dog.owner_name}</b> is waiting.</p>
+          <h2 className="mt-4 text-4xl font-bold">Γεια, είμαι ο/η {dog.name}!</h2>
+          <p className="text-muted-foreground">{dog.breed} · Διαβατήριο #{dog.fingerprint_id}</p>
+          <p className="mt-3">Ευχαριστώ που με βρήκες. Ο άνθρωπός μου, <b>{dog.owner_name}</b>, με περιμένει.</p>
           {dog.medical_alerts && (
             <div className="mt-4 flex items-start gap-2 rounded-2xl bg-destructive/15 p-3 text-left text-destructive">
               <AlertTriangle className="mt-0.5 size-5 shrink-0" />
-              <p className="font-bold">Urgent: {dog.medical_alerts}</p>
+              <p className="font-bold">Επείγον: {dog.medical_alerts}</p>
             </div>
           )}
           <div className="mt-6 grid gap-3">
             <a href={`tel:${tel}`} className="clay-btn flex items-center justify-center gap-2 bg-success py-4 text-lg text-primary-foreground">
-              <Phone /> Call Owner Now
+              <Phone /> Κάλεσε τώρα τον κηδεμόνα
             </a>
-            <a href={`sms:${tel}?body=${encodeURIComponent(`Hi! I found ${dog.name}. They're safe with me.`)}`} className="clay-btn flex items-center justify-center gap-2 bg-secondary py-4 text-lg text-secondary-foreground">
-              <MessageSquare /> Send SMS
+            <a href={`sms:${tel}?body=${encodeURIComponent(`Γεια σας! Βρήκα τον/τη ${dog.name}. Είναι ασφαλής μαζί μου.`)}`} className="clay-btn flex items-center justify-center gap-2 bg-secondary py-4 text-lg text-secondary-foreground">
+              <MessageSquare /> Αποστολή SMS
             </a>
           </div>
         </div>
       </div>
       <button onClick={onReset} className="mx-auto mt-6 flex items-center gap-2 text-sm font-bold text-muted-foreground">
-        <RotateCcw className="size-4" /> Scan another dog
+        <RotateCcw className="size-4" /> Σάρωση άλλου σκύλου
       </button>
     </div>
   );

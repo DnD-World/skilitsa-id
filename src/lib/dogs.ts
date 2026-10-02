@@ -4,10 +4,10 @@ import frenchie from "@/assets/dog-frenchie.png";
 import collie from "@/assets/dog-collie.png";
 
 export const AVATARS: Record<string, { src: string; breed: string }> = {
-  golden: { src: golden, breed: "Golden Retriever" },
-  beagle: { src: beagle, breed: "Beagle" },
-  frenchie: { src: frenchie, breed: "French Bulldog" },
-  collie: { src: collie, breed: "Collie" },
+  golden: { src: golden, breed: "Γκόλντεν Ριτρίβερ" },
+  beagle: { src: beagle, breed: "Μπιγκλ" },
+  frenchie: { src: frenchie, breed: "Γαλλικό Μπουλντόγκ" },
+  collie: { src: collie, breed: "Κόλεϊ" },
 };
 
 export function avatarSrc(key?: string | null) {
@@ -27,8 +27,8 @@ export type MatchDog = {
 
 // Used by the simulated scanner when no dogs are registered yet.
 export const DEMO_DOGS: MatchDog[] = [
-  { name: "Melo", breed: "Golden Retriever", avatar: "golden", photo_url: null, medical_alerts: "Requires daily insulin", owner_name: "Eleni (demo)", owner_phone: "+30 690 000 0001", fingerprint_id: "DEMO7A3F91C2" },
-  { name: "Bobos", breed: "Beagle", avatar: "beagle", photo_url: null, medical_alerts: null, owner_name: "Nikos (demo)", owner_phone: "+30 690 000 0002", fingerprint_id: "DEMO4B8E02D1" },
+  { name: "Μέλο", breed: "Γκόλντεν Ριτρίβερ", avatar: "golden", photo_url: null, medical_alerts: "Χρειάζεται καθημερινά ινσουλίνη", owner_name: "Ελένη (demo)", owner_phone: "+30 690 000 0001", fingerprint_id: "DEMO7A3F91C2" },
+  { name: "Μπόμπος", breed: "Μπιγκλ", avatar: "beagle", photo_url: null, medical_alerts: null, owner_name: "Νίκος (demo)", owner_phone: "+30 690 000 0002", fingerprint_id: "DEMO4B8E02D1" },
 ];
 
 /** Shrinks an uploaded photo so it can be stored directly with the passport. */

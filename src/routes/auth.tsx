@@ -9,10 +9,10 @@ import { avatarSrc } from "@/lib/dogs";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — SkilitsaID" },
-      { name: "description", content: "Sign in to manage your dog's biometric passport and care tools." },
-      { property: "og:title", content: "Sign in — SkilitsaID" },
-      { property: "og:description", content: "Manage your dog's biometric passport." },
+      { title: "Σύνδεση — SkilitsaID" },
+      { name: "description", content: "Συνδέσου για να διαχειριστείς το βιομετρικό διαβατήριο και τη φροντίδα του σκύλου σου." },
+      { property: "og:title", content: "Σύνδεση — SkilitsaID" },
+      { property: "og:description", content: "Διαχειρίσου το βιομετρικό διαβατήριο του σκύλου σου." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -42,19 +42,19 @@ function AuthPage() {
         : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin } });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
-    if (mode === "up") toast.success("Check your email to confirm your account.");
+    if (mode === "up") toast.success("Έλεγξε το email σου για να επιβεβαιώσεις τον λογαριασμό σου.");
   }
 
   return (
     <div className="mx-auto max-w-md">
       <div className="clay p-8">
         <img src={avatarSrc("frenchie")} alt="" className="mx-auto -mt-20 size-28 rounded-full border-8 border-background bg-muted" />
-        <h1 className="mt-2 text-center text-3xl font-bold">{mode === "in" ? "Welcome back" : "Join the pack"}</h1>
+         <h1 className="mt-2 text-center text-3xl font-bold">{mode === "in" ? "Καλώς ήρθες ξανά" : "Μπες στην παρέα"}</h1>
         <form onSubmit={submit} className="mt-6 space-y-3">
-          <input className={inputCls} type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input className={inputCls} type="password" required minLength={6} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+           <input className={inputCls} type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+           <input className={inputCls} type="password" required minLength={6} placeholder="Κωδικός πρόσβασης" value={password} onChange={(e) => setPassword(e.target.value)} />
           <button disabled={busy} className="clay-btn w-full bg-primary py-3 text-primary-foreground disabled:opacity-60">
-            {mode === "in" ? "Sign in" : "Create account"}
+             {mode === "in" ? "Σύνδεση" : "Δημιουργία λογαριασμού"}
           </button>
         </form>
         <button
@@ -64,10 +64,10 @@ function AuthPage() {
           }}
           className="clay-btn mt-3 w-full bg-muted py-3"
         >
-          Continue with Google
+           Συνέχεια με Google
         </button>
         <button onClick={() => setMode(mode === "in" ? "up" : "in")} className="mt-4 w-full text-sm font-bold text-primary">
-          {mode === "in" ? "New here? Create an account" : "Already have an account? Sign in"}
+           {mode === "in" ? "Νέος εδώ; Δημιούργησε λογαριασμό" : "Έχεις ήδη λογαριασμό; Συνδέσου"}
         </button>
       </div>
     </div>
