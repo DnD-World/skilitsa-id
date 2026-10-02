@@ -4,20 +4,20 @@ import { PageTitle } from "@/components/Shell";
 import { avatarSrc } from "@/lib/dogs";
 
 export const Route = createFileRoute("/_authenticated/community")({
-  head: () => ({ meta: [{ title: "Community & Playdates — SkilitsaID" }, { name: "description", content: "Skilitsa.com community, park playdates and rescue networks." }] }),
+  head: () => ({ meta: [{ title: "Παρέα και συναντήσεις — SkilitsaID" }, { name: "description", content: "Η κοινότητα του Skilitsa.com, συναντήσεις στο πάρκο και δίκτυα διάσωσης." }, { property: "og:title", content: "Παρέα και συναντήσεις — SkilitsaID" }, { property: "og:description", content: "Η κοινότητα του Skilitsa.com, συναντήσεις στο πάρκο και δίκτυα διάσωσης." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Community,
 });
 
 const LINKS = [
-  { icon: Home, title: "Skilitsa.com community", text: "The official home of Greek dog parents — stories, tips and events.", href: "https://skilitsa.com", tone: "bg-primary text-primary-foreground", av: "golden" },
-  { icon: Trees, title: "Weekend park playdates", text: "Join neighborhood groups meeting Saturday & Sunday mornings.", href: "https://skilitsa.com", tone: "bg-secondary text-secondary-foreground", av: "beagle" },
-  { icon: HeartHandshake, title: "Rescue networks", text: "Foster, adopt or volunteer with local shelters and rescues.", href: "https://skilitsa.com", tone: "bg-accent text-accent-foreground", av: "collie" },
+  { icon: Home, title: "Η κοινότητα του Skilitsa.com", text: "Το στέκι των ανθρώπων που αγαπούν τους σκύλους — ιστορίες, συμβουλές και εκδηλώσεις.", href: "https://skilitsa.com", tone: "bg-primary text-primary-foreground", av: "golden" },
+  { icon: Trees, title: "Συναντήσεις στο πάρκο", text: "Βρες παρέες της γειτονιάς που συναντιούνται τα πρωινά του Σαββατοκύριακου.", href: "https://skilitsa.com", tone: "bg-secondary text-secondary-foreground", av: "beagle" },
+  { icon: HeartHandshake, title: "Δίκτυα διάσωσης", text: "Φιλοξένησε, υιοθέτησε ή βοήθησε εθελοντικά τοπικά καταφύγια και ομάδες διάσωσης.", href: "https://skilitsa.com", tone: "bg-accent text-accent-foreground", av: "collie" },
 ];
 
 function Community() {
   return (
     <div>
-      <PageTitle title="Community Launchpad" sub="Because every dog deserves a pack." />
+       <PageTitle title="Η σκυλοπαρέα" sub="Γιατί κάθε σκύλος αξίζει τη δική του αγέλη." />
       <div className="grid gap-6 md:grid-cols-3">
         {LINKS.map((l) => (
           <a key={l.title} href={l.href} target="_blank" rel="noreferrer" className="clay group overflow-hidden transition hover:-translate-y-1">

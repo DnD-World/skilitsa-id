@@ -7,7 +7,7 @@ import { AVATARS, avatarSrc, fakeVector, resizePhoto } from "@/lib/dogs";
 import { useDelete, useInsert, useRows, useUpdate } from "@/lib/db";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "My Dog Passports — SkilitsaID" }, { name: "description", content: "Your dogs' biometric passports." }] }),
+  head: () => ({ meta: [{ title: "Τα διαβατήρια των σκύλων μου — SkilitsaID" }, { name: "description", content: "Τα βιομετρικά διαβατήρια των σκύλων σου." }, { property: "og:title", content: "Τα διαβατήρια των σκύλων μου — SkilitsaID" }, { property: "og:description", content: "Τα βιομετρικά διαβατήρια των σκύλων σου." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Dashboard,
 });
 
@@ -22,25 +22,25 @@ function Dashboard() {
   return (
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
-        <PageTitle title="Biometric Pet Passports" sub="Each passport carries an 896-dimension facial fingerprint." />
+         <PageTitle title="Βιομετρικά διαβατήρια σκύλων" sub="Κάθε διαβατήριο περιέχει ένα αποτύπωμα προσώπου 896 διαστάσεων." />
         <button onClick={() => setOpen(!open)} className="clay-btn mb-6 flex items-center gap-2 bg-primary px-5 py-3 text-primary-foreground">
-          <Plus className="size-5" /> Register a dog
+           <Plus className="size-5" /> Εγγραφή σκύλου
         </button>
       </div>
       {open && <RegisterForm onDone={() => setOpen(false)} />}
       {isLoading ? (
-        <p>Loading…</p>
+         <p>Φόρτωση…</p>
       ) : dogs.length === 0 && !open ? (
         <div className="clay p-10 text-center">
           <img src={avatarSrc("beagle")} alt="" className="mx-auto size-32" />
-          <p className="mt-3 text-lg font-bold">No passports yet. Register your first dog!</p>
+           <p className="mt-3 text-lg font-bold">Δεν υπάρχει ακόμη διαβατήριο. Πρόσθεσε τον πρώτο σου σκύλο!</p>
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
           {dogs.map((d) => (
             <div key={d.id} className="clay overflow-hidden">
               <div className="flex items-center justify-between bg-primary px-5 py-2 font-display text-sm font-bold uppercase tracking-widest text-primary-foreground">
-                <span>Biometric Pet Passport</span>
+                 <span>Βιομετρικό διαβατήριο σκύλου</span>
                 <Fingerprint className="size-5" />
               </div>
               <div className="flex gap-5 p-5">
@@ -48,8 +48,8 @@ function Dashboard() {
                 <div className="min-w-0 flex-1 text-sm">
                   <h3 className="text-2xl font-bold">{d.name}</h3>
                   <p className="text-muted-foreground">{d.breed}</p>
-                  <p className="mt-1">Chip: <b>{d.microchip || "—"}</b></p>
-                  <p>Contact: <b>{d.owner_name}</b> · {d.owner_phone}</p>
+                   <p className="mt-1">Microchip: <b>{d.microchip || "—"}</b></p>
+                   <p>Επικοινωνία: <b>{d.owner_name}</b> · {d.owner_phone}</p>
                   <p className="font-mono text-xs text-muted-foreground">ID #{d.fingerprint_id}</p>
                 </div>
               </div>
@@ -64,11 +64,11 @@ function Dashboard() {
                 ))}
               </div>
               <div className="flex items-center justify-between p-5 pt-3 text-sm">
-                <label className="flex items-center gap-2 font-bold">
+                 <label className="flex items-center gap-2 font-bold">
                   <input type="checkbox" checked={d.scannable} onChange={(e) => upd.mutate({ id: d.id, scannable: e.target.checked })} className="size-4 accent-[var(--primary)]" />
-                  Findable by public scanner
+                   Ορατός στη δημόσια σάρωση
                 </label>
-                <button aria-label="Delete passport" onClick={() => confirm(`Delete ${d.name}'s passport?`) && del.mutate(d.id)} className="text-muted-foreground hover:text-destructive">
+                 <button aria-label="Διαγραφή διαβατηρίου" onClick={() => confirm(`Να διαγραφεί το διαβατήριο του ${d.name};`) && del.mutate(d.id)} className="text-muted-foreground hover:text-destructive">
                   <Trash2 className="size-5" />
                 </button>
               </div>
@@ -96,7 +96,7 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
       { ...f, microchip: f.microchip || null, medical_alerts: f.medical_alerts || null, avatar, breed: AVATARS[avatar]?.breed ?? "Dog", photo_url: photo },
       {
         onSuccess: () => {
-          toast.success(`${f.name}'s passport is issued! 🐾`);
+           toast.success(`Το διαβατήριο του ${f.name} εκδόθηκε! 🐾`);
           onDone();
         },
         onSettled: () => setExtracting(false),
@@ -107,7 +107,7 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
   return (
     <form onSubmit={submit} className="clay mb-8 grid gap-4 p-6 md:grid-cols-2">
       <div className="md:col-span-2">
-        <p className="mb-2 font-bold">Breed avatar</p>
+         <p className="mb-2 font-bold">Εικονίδιο ράτσας</p>
         <div className="flex flex-wrap gap-3">
           {Object.entries(AVATARS).map(([k, a]) => (
             <button type="button" key={k} onClick={() => setAvatar(k)} className={`rounded-2xl border-4 p-1 ${avatar === k ? "border-primary" : "border-transparent"}`}>
@@ -115,18 +115,18 @@ function RegisterForm({ onDone }: { onDone: () => void }) {
             </button>
           ))}
           <label className="clay-btn grid size-[76px] cursor-pointer place-items-center overflow-hidden bg-muted text-xs">
-            {photo ? <img src={photo} alt="Uploaded" className="size-full object-cover" /> : "Face photo"}
+             {photo ? <img src={photo} alt="Φωτογραφία σκύλου" className="size-full object-cover" /> : "Φωτογραφία προσώπου"}
             <input type="file" accept="image/*" capture="environment" className="hidden" onChange={async (e) => e.target.files?.[0] && setPhoto(await resizePhoto(e.target.files[0]))} />
           </label>
         </div>
       </div>
-      <input className={inputCls} required placeholder="Dog's name" value={f.name} onChange={set("name")} />
-      <input className={inputCls} placeholder="Microchip number" value={f.microchip} onChange={set("microchip")} />
-      <input className={inputCls} required placeholder="Emergency contact name" value={f.owner_name} onChange={set("owner_name")} />
-      <input className={inputCls} required type="tel" placeholder="Emergency phone" value={f.owner_phone} onChange={set("owner_phone")} />
-      <input className={`${inputCls} md:col-span-2`} placeholder="Medical needs (e.g. Requires daily insulin)" value={f.medical_alerts} onChange={set("medical_alerts")} />
+       <input className={inputCls} required placeholder="Όνομα σκύλου" value={f.name} onChange={set("name")} />
+       <input className={inputCls} placeholder="Αριθμός microchip" value={f.microchip} onChange={set("microchip")} />
+       <input className={inputCls} required placeholder="Όνομα επικοινωνίας έκτακτης ανάγκης" value={f.owner_name} onChange={set("owner_name")} />
+       <input className={inputCls} required type="tel" placeholder="Τηλέφωνο έκτακτης ανάγκης" value={f.owner_phone} onChange={set("owner_phone")} />
+       <input className={`${inputCls} md:col-span-2`} placeholder="Ιατρικές ανάγκες (π.χ. χρειάζεται καθημερινά ινσουλίνη)" value={f.medical_alerts} onChange={set("medical_alerts")} />
       <button disabled={extracting} className="clay-btn bg-primary py-3 text-primary-foreground disabled:opacity-70 md:col-span-2">
-        {extracting ? "Extracting 896-d facial fingerprint…" : "Issue Biometric Passport"}
+         {extracting ? "Δημιουργία αποτυπώματος προσώπου 896-d…" : "Έκδοση βιομετρικού διαβατηρίου"}
       </button>
     </form>
   );
