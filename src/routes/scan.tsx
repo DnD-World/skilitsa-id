@@ -183,7 +183,7 @@ function ReunionCard({ dog, score, region, onReset }: { dog: MatchDog; score: nu
   const stars = reportStars({ shelter: atShelter && !!shelter.trim(), secondPhoto: !!photo2, score, purebred: dog.purebred });
 
   function pin() {
-    if (!navigator.geolocation) return toast.error("Ο εντοπισμός δεν υποστηρίζεται.");
+    if (!navigator.geolocation) { toast.error("Ο εντοπισμός δεν υποστηρίζεται."); return; }
     navigator.geolocation.getCurrentPosition(
       (p) => {
         setMode("pin");
@@ -212,7 +212,7 @@ function ReunionCard({ dog, score, region, onReset }: { dog: MatchDog; score: nu
       _score: Number(score.toFixed(1)),
     } as never);
     setBusy(false);
-    if (error) return toast.error("Η αποστολή απέτυχε. Έλεγξε τα στοιχεία σου.");
+    if (error) { toast.error("Η αποστολή απέτυχε. Έλεγξε τα στοιχεία σου."); return; }
     setSent(Number(data));
   }
 
