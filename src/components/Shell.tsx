@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState, type ReactNode } from "react";
-import { Bone, Heart, Moon, Sun, ScanFace, LogOut } from "lucide-react";
+import { Bone, Heart, Moon, Sun, ScanFace, LogOut, PawPrint } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
@@ -82,7 +82,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
           <Link to="/" className="mr-auto flex items-center gap-2 font-display text-2xl font-bold text-foreground">
-            🐾 My.<span className="text-primary">Skilitsa</span>.com
+            <PawPrint className="size-6 text-primary" /> My.<span className="text-primary">Skilitsa</span>.com
           </Link>
           {user && (
             <nav className="order-last flex w-full gap-1 overflow-x-auto md:order-none md:w-auto">
