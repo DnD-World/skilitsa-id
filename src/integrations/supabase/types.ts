@@ -26,9 +26,11 @@ export type Database = {
           name: string
           owner_id: string
           owner_name: string
-          owner_phone: string
           photo_url: string | null
+          purebred: boolean
+          region: string
           scannable: boolean
+          status: string
         }
         Insert: {
           avatar?: string
@@ -41,9 +43,11 @@ export type Database = {
           name: string
           owner_id?: string
           owner_name: string
-          owner_phone: string
           photo_url?: string | null
+          purebred?: boolean
+          region?: string
           scannable?: boolean
+          status?: string
         }
         Update: {
           avatar?: string
@@ -56,9 +60,11 @@ export type Database = {
           name?: string
           owner_id?: string
           owner_name?: string
-          owner_phone?: string
           photo_url?: string | null
+          purebred?: boolean
+          region?: string
           scannable?: boolean
+          status?: string
         }
         Relationships: []
       }
@@ -91,6 +97,59 @@ export type Database = {
           spent_on?: string
         }
         Relationships: []
+      }
+      finder_reports: {
+        Row: {
+          created_at: string
+          dog_id: string
+          expires_at: string
+          finder_email: string
+          id: string
+          location: string
+          location_mode: string
+          match_score: number
+          message: string | null
+          second_photo: string | null
+          shelter_name: string | null
+          stars: number
+        }
+        Insert: {
+          created_at?: string
+          dog_id: string
+          expires_at?: string
+          finder_email: string
+          id?: string
+          location: string
+          location_mode: string
+          match_score: number
+          message?: string | null
+          second_photo?: string | null
+          shelter_name?: string | null
+          stars: number
+        }
+        Update: {
+          created_at?: string
+          dog_id?: string
+          expires_at?: string
+          finder_email?: string
+          id?: string
+          location?: string
+          location_mode?: string
+          match_score?: number
+          message?: string | null
+          second_photo?: string | null
+          shelter_name?: string | null
+          stars?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finder_reports_dog_id_fkey"
+            columns: ["dog_id"]
+            isOneToOne: false
+            referencedRelation: "dogs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       food_bags: {
         Row: {
@@ -214,17 +273,30 @@ export type Database = {
     }
     Functions: {
       scan_match: {
-        Args: never
+        Args: { _region: string }
         Returns: {
           avatar: string
           breed: string
+          dog_id: string
           fingerprint_id: string
           medical_alerts: string
           name: string
-          owner_name: string
-          owner_phone: string
           photo_url: string
+          purebred: boolean
         }[]
+      }
+      submit_finder_report: {
+        Args: {
+          _dog_id: string
+          _email: string
+          _location: string
+          _message: string
+          _mode: string
+          _score: number
+          _second_photo: string
+          _shelter: string
+        }
+        Returns: number
       }
     }
     Enums: {
