@@ -5,9 +5,9 @@ import { AVATARS } from "@/lib/dogs";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SkilitsaID — Σάρωσε έναν χαμένο σκύλο και βρες την οικογένειά του" },
+      { title: "My.Skilitsa.com — Σάρωσε έναν χαμένο σκύλο και βρες την οικογένειά του" },
       { name: "description", content: "Βιομετρικά διαβατήρια σκύλων, δημόσια σάρωση από κινητό και εργαλεία καθημερινής φροντίδας." },
-      { property: "og:title", content: "SkilitsaID — Βιομετρικό μητρώο σκύλων" },
+      { property: "og:title", content: "My.Skilitsa.com — Βιομετρικό μητρώο σκύλων" },
       { property: "og:description", content: "Κάθε κινητό γίνεται σαρωτής προσώπου σκύλων. Χωρίς ειδικό μηχάνημα, κλινική ή λογαριασμό." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

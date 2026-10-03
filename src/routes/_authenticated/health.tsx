@@ -5,7 +5,7 @@ import { PageTitle, inputCls } from "@/components/Shell";
 import { daysBetween, today, useDelete, useInsert, useRows, useUpdate } from "@/lib/db";
 
 export const Route = createFileRoute("/_authenticated/health")({
-  head: () => ({ meta: [{ title: "Υγεία και εμβόλια — SkilitsaID" }, { name: "description", content: "Πρόγραμμα εμβολίων, κτηνιατρικών ελέγχων και φαρμάκων." }, { property: "og:title", content: "Υγεία και εμβόλια — SkilitsaID" }, { property: "og:description", content: "Πρόγραμμα εμβολίων, κτηνιατρικών ελέγχων και φαρμάκων." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
+  head: () => ({ meta: [{ title: "Υγεία και εμβόλια — My.Skilitsa.com" }, { name: "description", content: "Πρόγραμμα εμβολίων, κτηνιατρικών ελέγχων και φαρμάκων." }, { property: "og:title", content: "Υγεία και εμβόλια — My.Skilitsa.com" }, { property: "og:description", content: "Πρόγραμμα εμβολίων, κτηνιατρικών ελέγχων και φαρμάκων." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Health,
 });
 

@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useDelete, useInsert, useRows } from "@/lib/db";
 
 export const Route = createFileRoute("/_authenticated/budget")({
-  head: () => ({ meta: [{ title: "Έξοδα σκύλου — SkilitsaID" }, { name: "description", content: "Παρακολούθησε τα έξοδα τροφής, κτηνιάτρου και περιποίησης." }, { property: "og:title", content: "Έξοδα σκύλου — SkilitsaID" }, { property: "og:description", content: "Παρακολούθησε τα έξοδα φροντίδας του σκύλου σου." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
+  head: () => ({ meta: [{ title: "Έξοδα σκύλου — My.Skilitsa.com" }, { name: "description", content: "Παρακολούθησε τα έξοδα τροφής, κτηνιάτρου και περιποίησης." }, { property: "og:title", content: "Έξοδα σκύλου — My.Skilitsa.com" }, { property: "og:description", content: "Παρακολούθησε τα έξοδα φροντίδας του σκύλου σου." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Budget,
 });
 

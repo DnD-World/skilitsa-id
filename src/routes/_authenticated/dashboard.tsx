@@ -7,7 +7,7 @@ import { AVATARS, avatarSrc, fakeVector, resizePhoto, REGIONS } from "@/lib/dogs
 import { useDelete, useInsert, useRows, useUpdate } from "@/lib/db";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "Τα διαβατήρια των σκύλων μου — SkilitsaID" }, { name: "description", content: "Τα βιομετρικά διαβατήρια των σκύλων σου." }, { property: "og:title", content: "Τα διαβατήρια των σκύλων μου — SkilitsaID" }, { property: "og:description", content: "Τα βιομετρικά διαβατήρια των σκύλων σου." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
+  head: () => ({ meta: [{ title: "Τα διαβατήρια των σκύλων μου — My.Skilitsa.com" }, { name: "description", content: "Τα βιομετρικά διαβατήρια των σκύλων σου." }, { property: "og:title", content: "Τα διαβατήρια των σκύλων μου — My.Skilitsa.com" }, { property: "og:description", content: "Τα βιομετρικά διαβατήρια των σκύλων σου." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Dashboard,
 });
 
@@ -29,7 +29,7 @@ function Dashboard() {
       </div>
       <div className="mb-6 flex gap-3 rounded-2xl border border-border p-4 text-sm">
         <Info className="mt-0.5 size-5 shrink-0 text-primary" />
-        <p>Το SkilitsaID είναι βοηθητικό εργαλείο επανένωσης και <b>δεν αντικαθιστά</b> το υποχρεωτικό microchip και την εγγραφή στο Εθνικό Μητρώο Ζώων Συντροφιάς (Ν. 4830/2021). Το αποτύπωμα αφορά τον σκύλο, όχι εσένα. Δεν δημοσιεύουμε ποτέ τηλέφωνο ή email σου.</p>
+        <p>Το My.Skilitsa.com είναι βοηθητικό εργαλείο επανένωσης και <b>δεν αντικαθιστά</b> το υποχρεωτικό microchip και την εγγραφή στο Εθνικό Μητρώο Ζώων Συντροφιάς (Ν. 4830/2021). Το αποτύπωμα αφορά τον σκύλο, όχι εσένα. Δεν δημοσιεύουμε ποτέ τηλέφωνο ή email σου.</p>
       </div>
       <Reports />
       {open && <RegisterForm onDone={() => setOpen(false)} />}

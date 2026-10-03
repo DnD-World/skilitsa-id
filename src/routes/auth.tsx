@@ -9,9 +9,9 @@ import { avatarSrc } from "@/lib/dogs";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Σύνδεση — SkilitsaID" },
+      { title: "Σύνδεση — My.Skilitsa.com" },
       { name: "description", content: "Συνδέσου για να διαχειριστείς το βιομετρικό διαβατήριο και τη φροντίδα του σκύλου σου." },
-      { property: "og:title", content: "Σύνδεση — SkilitsaID" },
+      { property: "og:title", content: "Σύνδεση — My.Skilitsa.com" },
       { property: "og:description", content: "Διαχειρίσου το βιομετρικό διαβατήριο του σκύλου σου." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

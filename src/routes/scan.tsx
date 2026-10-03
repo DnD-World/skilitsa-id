@@ -9,9 +9,9 @@ import { inputCls } from "@/components/Shell";
 export const Route = createFileRoute("/scan")({
   head: () => ({
     meta: [
-      { title: "Σάρωση χαμένου σκύλου — SkilitsaID" },
+      { title: "Σάρωση χαμένου σκύλου — My.Skilitsa.com" },
       { name: "description", content: "Βρήκες σκύλο; Σάρωσε το πρόσωπό του και ειδοποίησε τον κηδεμόνα του με ασφάλεια, χωρίς λογαριασμό." },
-      { property: "og:title", content: "Σάρωση χαμένου σκύλου — SkilitsaID" },
+      { property: "og:title", content: "Σάρωση χαμένου σκύλου — My.Skilitsa.com" },
       { property: "og:description", content: "Σάρωσε το πρόσωπο ενός χαμένου σκύλου και βοήθησέ τον να επιστρέψει στην οικογένειά του." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
