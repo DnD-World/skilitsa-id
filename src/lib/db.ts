@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
-type Table = "dogs" | "expenses" | "health_events" | "loyalty_cards" | "food_bags";
+type Table = "dogs" | "finder_reports" | "expenses" | "health_events" | "loyalty_cards" | "food_bags";
 
 /** Lists the signed-in user's rows (RLS scopes to owner). */
 export function useRows<T = any>(table: Table, order = "created_at", ascending = false) {
