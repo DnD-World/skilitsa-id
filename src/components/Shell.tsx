@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState, type ReactNode } from "react";
-import { Bone, Heart, Moon, Sun, ScanFace, LogOut } from "lucide-react";
+import { Bone, Heart, Moon, Sun, ScanFace, LogOut, PawPrint } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
@@ -81,8 +81,8 @@ export function Shell({ children }: { children: ReactNode }) {
       <FloatingBg />
       <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
-          <Link to="/" className="mr-auto flex items-center gap-2 font-display text-2xl font-bold text-primary">
-            🐾 Skilitsa<span className="text-foreground">ID</span>
+          <Link to="/" className="mr-auto flex items-center gap-2 font-display text-2xl font-bold text-foreground">
+            <PawPrint className="size-6 text-primary" /> My.<span className="text-primary">Skilitsa</span>.com
           </Link>
           {user && (
             <nav className="order-last flex w-full gap-1 overflow-x-auto md:order-none md:w-auto">
@@ -98,7 +98,7 @@ export function Shell({ children }: { children: ReactNode }) {
               ))}
             </nav>
           )}
-          <Link to="/scan" className="clay-btn flex items-center gap-2 bg-destructive px-4 py-2 text-sm text-destructive-foreground">
+          <Link to="/scan" className="clay-btn flex items-center gap-2 bg-primary px-4 py-2 text-sm text-primary-foreground">
              <ScanFace className="size-4" /> Σάρωση χαμένου σκύλου
           </Link>
           <ThemeToggle />

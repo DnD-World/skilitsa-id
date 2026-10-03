@@ -4,7 +4,7 @@ import { PageTitle } from "@/components/Shell";
 import { avatarSrc } from "@/lib/dogs";
 
 export const Route = createFileRoute("/_authenticated/community")({
-  head: () => ({ meta: [{ title: "Παρέα και συναντήσεις — SkilitsaID" }, { name: "description", content: "Η κοινότητα του Skilitsa.com, συναντήσεις στο πάρκο και δίκτυα διάσωσης." }, { property: "og:title", content: "Παρέα και συναντήσεις — SkilitsaID" }, { property: "og:description", content: "Η κοινότητα του Skilitsa.com, συναντήσεις στο πάρκο και δίκτυα διάσωσης." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
+  head: () => ({ meta: [{ title: "Παρέα και συναντήσεις — My.Skilitsa.com" }, { name: "description", content: "Η κοινότητα του Skilitsa.com, συναντήσεις στο πάρκο και δίκτυα διάσωσης." }, { property: "og:title", content: "Παρέα και συναντήσεις — My.Skilitsa.com" }, { property: "og:description", content: "Η κοινότητα του Skilitsa.com, συναντήσεις στο πάρκο και δίκτυα διάσωσης." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Community,
 });
 

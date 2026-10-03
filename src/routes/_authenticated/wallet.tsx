@@ -7,7 +7,7 @@ import { PageTitle, inputCls } from "@/components/Shell";
 import { daysBetween, today, useDelete, useInsert, useRows } from "@/lib/db";
 
 export const Route = createFileRoute("/_authenticated/wallet")({
-  head: () => ({ meta: [{ title: "Κάρτες και ανανέωση τροφής — SkilitsaID" }, { name: "description", content: "Κάρτες επιβράβευσης και υπενθυμίσεις ανανέωσης τροφής." }, { property: "og:title", content: "Κάρτες και ανανέωση τροφής — SkilitsaID" }, { property: "og:description", content: "Κάρτες επιβράβευσης και υπενθυμίσεις ανανέωσης τροφής." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
+  head: () => ({ meta: [{ title: "Κάρτες και ανανέωση τροφής — My.Skilitsa.com" }, { name: "description", content: "Κάρτες επιβράβευσης και υπενθυμίσεις ανανέωσης τροφής." }, { property: "og:title", content: "Κάρτες και ανανέωση τροφής — My.Skilitsa.com" }, { property: "og:description", content: "Κάρτες επιβράβευσης και υπενθυμίσεις ανανέωσης τροφής." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: WalletPage,
 });
 

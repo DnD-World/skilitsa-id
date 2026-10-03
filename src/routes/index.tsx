@@ -5,9 +5,9 @@ import { AVATARS } from "@/lib/dogs";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SkilitsaID — Σάρωσε έναν χαμένο σκύλο και βρες την οικογένειά του" },
+      { title: "My.Skilitsa.com — Σάρωσε έναν χαμένο σκύλο και βρες την οικογένειά του" },
       { name: "description", content: "Βιομετρικά διαβατήρια σκύλων, δημόσια σάρωση από κινητό και εργαλεία καθημερινής φροντίδας." },
-      { property: "og:title", content: "SkilitsaID — Βιομετρικό μητρώο σκύλων" },
+      { property: "og:title", content: "My.Skilitsa.com — Βιομετρικό μητρώο σκύλων" },
       { property: "og:description", content: "Κάθε κινητό γίνεται σαρωτής προσώπου σκύλων. Χωρίς ειδικό μηχάνημα, κλινική ή λογαριασμό." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -39,7 +39,7 @@ function Index() {
              Τα microchip χρειάζονται ειδικό σαρωτή. Τα πρόσωπα όχι. Βρήκες σκύλο στο πάρκο; Σάρωσέ τον και κάλεσε αμέσως την οικογένειά του — χωρίς λογαριασμό.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link to="/scan" className="clay-btn flex items-center gap-2 bg-destructive px-6 py-3 text-lg text-destructive-foreground">
+            <Link to="/scan" className="clay-btn flex items-center gap-2 bg-primary px-6 py-3 text-lg text-primary-foreground">
                <ScanFace /> Σάρωση χαμένου σκύλου
             </Link>
             <Link to="/dashboard" className="clay-btn bg-primary px-6 py-3 text-lg text-primary-foreground">
