@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-display: "Playpen Sans", "Comfortaa", ui-rounded, system-ui, sans-serif;
   --font-sans: "Comfortaa", ui-rounded, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -60,24 +60,24 @@
   --card-foreground: oklch(0.14 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.14 0 0);
-  --primary: oklch(0.62 0.17 255);
+  --primary: oklch(0.63 0.15 252);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.93 0.03 250);
-  --secondary-foreground: oklch(0.3 0.08 255);
-  --muted: oklch(0.955 0 0);
+  --secondary: oklch(0.95 0.03 252);
+  --secondary-foreground: oklch(0.4 0.1 252);
+  --muted: oklch(0.965 0 0);
   --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.88 0.08 15);
-  --accent-foreground: oklch(0.35 0.1 20);
+  --accent: oklch(0.95 0.03 252);
+  --accent-foreground: oklch(0.4 0.1 252);
   --destructive: oklch(0.6 0.21 25);
   --destructive-foreground: oklch(0.99 0 0);
   --success: oklch(0.66 0.15 150);
   --warning: oklch(0.8 0.16 80);
   --sky: oklch(0.93 0.03 240);
-  --border: oklch(0.14 0 0 / 0.85);
-  --input: oklch(0.85 0 0);
-  --ring: oklch(0.62 0.17 255);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.88 0 0);
+  --ring: oklch(0.63 0.15 252);
   --clay-shadow: oklch(0.3 0 0);
-  --chart-1: oklch(0.62 0.17 255);
+  --chart-1: oklch(0.63 0.15 252);
   --chart-2: oklch(0.7 0.12 175);
   --chart-3: oklch(0.7 0.15 15);
   --chart-4: oklch(0.8 0.16 80);
@@ -99,22 +99,22 @@
   --card-foreground: oklch(0.97 0 0);
   --popover: oklch(0.16 0 0);
   --popover-foreground: oklch(0.97 0 0);
-  --primary: oklch(0.66 0.16 255);
+  --primary: oklch(0.68 0.14 252);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.3 0.05 255);
-  --secondary-foreground: oklch(0.95 0.02 250);
+  --secondary: oklch(0.28 0.05 252);
+  --secondary-foreground: oklch(0.95 0.02 252);
   --muted: oklch(0.22 0 0);
   --muted-foreground: oklch(0.72 0 0);
-  --accent: oklch(0.45 0.1 15);
-  --accent-foreground: oklch(0.95 0.03 15);
+  --accent: oklch(0.28 0.05 252);
+  --accent-foreground: oklch(0.95 0.02 252);
   --destructive: oklch(0.66 0.19 25);
   --destructive-foreground: oklch(0.99 0 0);
   --success: oklch(0.7 0.15 150);
   --warning: oklch(0.82 0.15 80);
   --sky: oklch(0.25 0.03 250);
-  --border: oklch(0.97 0 0 / 0.8);
+  --border: oklch(0.3 0 0);
   --input: oklch(0.35 0 0);
-  --ring: oklch(0.66 0.16 255);
+  --ring: oklch(0.68 0.14 252);
   --clay-shadow: oklch(0 0 0);
   --sidebar: oklch(0 0 0);
   --sidebar-foreground: oklch(0.97 0 0);
@@ -150,27 +150,17 @@
 @utility clay {
   border-radius: var(--radius-2xl);
   background: var(--card);
-  box-shadow:
-    0 8px 0 -2px color-mix(in oklch, var(--clay-shadow) 18%, transparent),
-    0 14px 30px -10px color-mix(in oklch, var(--clay-shadow) 35%, transparent),
-    inset 0 2px 0 color-mix(in oklch, white 60%, transparent);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 24px -12px color-mix(in oklch, var(--clay-shadow) 18%, transparent);
 }
 
 @utility clay-btn {
   border-radius: 9999px;
   font-family: var(--font-display);
-  font-weight: 600;
-  box-shadow:
-    0 6px 0 color-mix(in oklch, var(--clay-shadow) 70%, black 10%),
-    inset 0 2px 0 color-mix(in oklch, white 45%, transparent);
-  transition: transform 0.1s, box-shadow 0.1s;
-  &:hover { transform: translateY(-1px); }
-  &:active {
-    transform: translateY(5px);
-    box-shadow:
-      0 1px 0 color-mix(in oklch, var(--clay-shadow) 70%, black 10%),
-      inset 0 2px 4px color-mix(in oklch, black 20%, transparent);
-  }
+  font-weight: 700;
+  transition: filter 0.15s, transform 0.15s;
+  &:hover { filter: brightness(1.07); transform: translateY(-1px); }
+  &:active { transform: translateY(0); filter: brightness(0.95); }
 }
 
 @keyframes floaty {
